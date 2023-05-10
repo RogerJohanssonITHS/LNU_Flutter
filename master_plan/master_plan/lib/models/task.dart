@@ -1,6 +1,6 @@
 class Task {
   String description;
-  bool complete;
+  bool? complete;
 
   Task({
     this.complete = false,
