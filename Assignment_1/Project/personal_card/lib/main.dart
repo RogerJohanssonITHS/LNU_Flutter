@@ -38,7 +38,7 @@ class MyStatelessWidget extends StatelessWidget {
               child: ClipOval(
                 child: Image.asset(
                   ('assets/images/_E_R0553_edit.jpg'),
-                  width: 150,
+                  width: 200,
                   height: 200,
                   fit: BoxFit.cover,
                 ),
@@ -51,26 +51,57 @@ class MyStatelessWidget extends StatelessWidget {
               style: GoogleFonts.aladin(fontSize: 32),
             ),
             Card(
+              //margin: const EdgeInsets.symmetric(horizontal: 8.0),
               color: Colors.redAccent,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    ('Student'),
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.bitter(
-                        fontSize: 32,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    ('Roger Johansson'),
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.bitter(fontSize: 32),
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      ('Student'),
+                      textDirection: TextDirection.ltr,
+                      textAlign: TextAlign.end,
+                      style: GoogleFonts.bitter(
+                          fontSize: 32,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.email_rounded),
+                        Text(
+                          (' Email: rj222rs@student.lnu.se'),
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.bitter(fontSize: 32),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.phone_outlined),
+                        Text(
+                          (' Phone: 0709-729000'),
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.bitter(fontSize: 32),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.web_outlined),
+                        Text(
+                          (' Web: https://lnu.se'),
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.bitter(fontSize: 32),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
