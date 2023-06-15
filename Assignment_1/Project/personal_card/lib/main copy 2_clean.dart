@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
+/// main application widget
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -22,26 +21,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// stateless widget that the main application instantiates
 class MyStatelessWidget extends StatelessWidget {
   const MyStatelessWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: double.infinity,
-        // set the width of this Container to 100% screen width
-        width: double.infinity,
-        decoration: const BoxDecoration(color: Colors.purple),
-
-        child: Column(
-          // Vertically center the widget inside the column
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: 100,
-              width: 100,
-              decoration: const BoxDecoration(color: Colors.purple),
-              child: ClipOval(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40.0),
+          child: Column(
+            children: <Widget>[
+              ClipOval(
                 child: Image.asset(
                   ('assets/images/_E_R0553_edit.jpg'),
                   width: 200,
@@ -49,19 +42,15 @@ class MyStatelessWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
-            Text(
-              ('Roger Johansson'),
-              textDirection: TextDirection.ltr,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.greatVibes(fontSize: 34),
-            ),
-            SizedBox(
-              height: 140,
-              width: 400,
-              child: Card(
+              Text(
+                ('Roger Johansson'),
+                textDirection: TextDirection.ltr,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.greatVibes(fontSize: 34),
+              ),
+              Card(
                 //margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                color: Colors.purple,
+                color: Colors.redAccent,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
@@ -111,10 +100,10 @@ class MyStatelessWidget extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
