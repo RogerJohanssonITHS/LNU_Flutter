@@ -38,8 +38,8 @@ class MyStatelessWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              height: 100,
-              width: 100,
+              height: 200,
+              width: 200,
               decoration: const BoxDecoration(color: Colors.purple),
               child: ClipOval(
                 child: Image.asset(
@@ -50,25 +50,28 @@ class MyStatelessWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              ('Roger Johansson'),
-              textDirection: TextDirection.ltr,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.greatVibes(fontSize: 34),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                ('Roger Johansson'),
+                textDirection: TextDirection.ltr,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.greatVibes(fontSize: 38),
+              ),
             ),
             SizedBox(
-              height: 140,
-              width: 400,
+              height: 135,
+              width: 380,
               child: Card(
-                //margin: const EdgeInsets.symmetric(horizontal: 8.0),
                 color: Colors.purple,
+                shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10)),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             ('Flutter student'),
