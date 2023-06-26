@@ -29,12 +29,9 @@ class MyStatelessWidget extends StatelessWidget {
     return Scaffold(
       body: Container(
         height: double.infinity,
-        // set the width of this Container to 100% screen width
         width: double.infinity,
         decoration: const BoxDecoration(color: Colors.purple),
-
         child: Column(
-          // Vertically center the widget inside the column
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
@@ -92,7 +89,6 @@ class MyStatelessWidget extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        //mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const Icon(Icons.phone_outlined),
                           Text(
