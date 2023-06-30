@@ -19,6 +19,11 @@ class ToDoListApp extends StatelessWidget {
   }
 }
 
+class ToDo {
+  ToDo({required this.task});
+  String task;
+}
+
 class ToDoList extends StatefulWidget {
   const ToDoList({super.key, required this.title});
 
@@ -29,26 +34,20 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  final List<Todo> _myTodos = <Todo>[];
+  final List<ToDo> _myToDos = <ToDo>[];
   final TextEditingController _textEditingController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
-  void _addTodo(String task) {
+  void _addToDo(String task) {
     setState(() {
-      _myTodos.add(Todo(task: task, done: false));
+      _myToDos.add(ToDo(task: task));
     });
     _textEditingController.clear();
   }
 
-  // void _handleTodoChange(Todo todo) {
-  //   setState(() {
-  //     todo.done = !todo.done;
-  //   });
-  // }
-
-  void _deleteTodo(Todo todo) {
+  void _deleteToDo(ToDo toDo) {
     setState(() {
-      _myTodos.removeWhere((element) => element.task == todo.task);
+      _myToDos.removeWhere((element) => element.task == toDo.task);
     });
   }
 
@@ -65,11 +64,10 @@ class _ToDoListState extends State<ToDoList> {
           child: ListView(
             controller: _scrollController,
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            children: _myTodos.map((Todo todo) {
-              return TodoItem(
-                todo: todo,
-                //onTodoChanged: _handleTodoChange,
-                removeTodo: _deleteTodo,
+            children: _myToDos.map((ToDo toDo) {
+              return ToDoItem(
+                toDo: toDo,
+                removeToDo: _deleteToDo,
               );
             }).toList(),
           ),
@@ -87,20 +85,20 @@ class _ToDoListState extends State<ToDoList> {
   Future<void> _displayDialog() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false,
+      barrierColor: Colors.green.withOpacity(0.3),
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add a ToDo'),
           content: TextField(
             controller: _textEditingController,
-            decoration: const InputDecoration(hintText: 'Add ToDo here'),
+            decoration: const InputDecoration(hintText: 'Type ToDo here'),
             autofocus: true,
           ),
           actions: <Widget>[
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
               onPressed: () {
@@ -111,14 +109,14 @@ class _ToDoListState extends State<ToDoList> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
               onPressed: () {
                 Navigator.of(context).pop();
-                _addTodo(_textEditingController.text);
+                _addToDo(_textEditingController.text);
               },
-              child: const Text('Add'),
+              child: const Text('Add Item'),
             ),
           ],
         );
@@ -127,62 +125,35 @@ class _ToDoListState extends State<ToDoList> {
   }
 }
 
-class Todo {
-  Todo({required this.task, required this.done});
-  String task;
-  bool done;
-}
+class ToDoItem extends StatelessWidget {
+  ToDoItem({required this.toDo, required this.removeToDo})
+      : super(key: ObjectKey(toDo));
 
-class TodoItem extends StatelessWidget {
-  TodoItem(
-      {required this.todo,
-      //required this.onTodoChanged,
-      required this.removeTodo})
-      : super(key: ObjectKey(todo));
-
-  final Todo todo;
-  //final void Function(Todo todo) onTodoChanged;
-  final void Function(Todo todo) removeTodo;
-
-  // TextStyle? _getTextStyle(bool checked) {
-  //   if (!checked) return null;
-
-  //   return const TextStyle(
-  //     color: Colors.black54,
-  //     decoration: TextDecoration.lineThrough,
-  //   );
-  // }
+  final ToDo toDo;
+  final void Function(ToDo toDo) removeToDo;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        removeTodo(todo);
+        removeToDo(toDo);
       },
-      // leading: Checkbox(
-      //   checkColor: Colors.greenAccent,
-      //   activeColor: Colors.red,
-      //   value: todo.done,
-      //   onChanged: (value) {
-      //     onTodoChanged(todo);
-      //   },
-      // ),
       title: Row(children: <Widget>[
         Tooltip(
           message: 'Click row or trash can to delete ToDo!',
           child: Text(
-            todo.task,
+            toDo.task,
           ),
         ),
         IconButton(
-          iconSize: 30,
+          iconSize: 24,
           icon: const Icon(
             Icons.delete_outline,
             color: Colors.red,
           ),
           alignment: Alignment.centerLeft,
           onPressed: () {
-            removeTodo(todo);
+            removeToDo(toDo);
           },
         ),
       ]),
