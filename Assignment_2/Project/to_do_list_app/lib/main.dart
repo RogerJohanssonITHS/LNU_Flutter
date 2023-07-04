@@ -26,7 +26,6 @@ class ToDo {
 
 class ToDoList extends StatefulWidget {
   const ToDoList({super.key, required this.title});
-
   final String title;
 
   @override
@@ -35,14 +34,14 @@ class ToDoList extends StatefulWidget {
 
 class _ToDoListState extends State<ToDoList> {
   final List<ToDo> _myToDos = <ToDo>[];
-  final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _inputTextController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
   void _addToDo(String task) {
     setState(() {
       _myToDos.add(ToDo(task: task));
     });
-    _textEditingController.clear();
+    _inputTextController.clear();
   }
 
   void _deleteToDo(ToDo toDo) {
@@ -74,7 +73,7 @@ class _ToDoListState extends State<ToDoList> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _displayDialog(),
+        onPressed: () => _showInputTextField(),
         tooltip: 'Add a ToDo',
         backgroundColor: Colors.green,
         child: const Icon(Icons.add),
@@ -82,7 +81,7 @@ class _ToDoListState extends State<ToDoList> {
     );
   }
 
-  Future<void> _displayDialog() async {
+  Future<void> _showInputTextField() async {
     return showDialog<void>(
       context: context,
       barrierColor: Colors.green.withOpacity(0.3),
@@ -90,7 +89,7 @@ class _ToDoListState extends State<ToDoList> {
       builder: (BuildContext context) {
         return AlertDialog(
           content: TextField(
-            controller: _textEditingController,
+            controller: _inputTextController,
             decoration: const InputDecoration(hintText: 'Type ToDo here'),
             autofocus: true,
           ),
@@ -114,7 +113,7 @@ class _ToDoListState extends State<ToDoList> {
               ),
               onPressed: () {
                 Navigator.of(context).pop();
-                _addToDo(_textEditingController.text);
+                _addToDo(_inputTextController.text);
               },
               child: const Text('Add Item'),
             ),
