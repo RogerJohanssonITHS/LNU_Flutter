@@ -46,7 +46,8 @@ class _ToDoListState extends State<ToDoList> {
 
   void _deleteToDo(ToDo toDo) {
     setState(() {
-      _myToDos.removeWhere((element) => element.task == toDo.task);
+      _myToDos.removeAt(
+          _myToDos.indexWhere((element) => element.task == toDo.task));
     });
   }
 
@@ -112,8 +113,13 @@ class _ToDoListState extends State<ToDoList> {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
-                _addToDo(_inputTextController.text);
+                _inputTextController.text.isNotEmpty
+                    ? _addToDo(_inputTextController.text)
+                    : Navigator.of(context).pop();
+                // {
+                //   Navigator.of(context).pop();
+                //   //_addToDo(_inputTextController.text);
+                // }
               },
               child: const Text('Add Item'),
             ),
